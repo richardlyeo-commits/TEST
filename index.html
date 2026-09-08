@@ -2,18 +2,18 @@
 <!--
     ==================================================
     PROJECT: 삼영보영 주간 소식지 Web Viewer
-    VERSION: 20260908-2
+    VERSION: 20260908-3
     LAST UPDATED: 2026-09-08
     CHANGES: 
-    - 로고 입체감 필터 효과 및 Hover 반응 강화 (Drop Shadow & Contrast)
-    - 캐시 방지 버전 표시 업데이트
+    - 로고 이미지 뭉개짐 원인 제거 (mix-blend-mode 및 과도한 filter 제거)
+    - 로고 전용 흰색 입체 프레임(brand-logo-wrapper) 적용
     ==================================================
 -->
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>삼영보영 주간 소식지 (v20260908-2)</title>
+    <title>삼영보영 주간 소식지 (v20260908-3)</title>
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <!-- Viewer.js CSS (이미지 줌) -->
@@ -91,26 +91,26 @@
             gap: 16px;
         }
 
-        /* 🏷️ 로고: 입체 그림자 및 선명도 강화 */
-        .brand-logo {
-            height: 52px;
-            width: auto;
-            object-fit: contain;
-            mix-blend-mode: multiply;
-            filter: 
-                drop-shadow(2px 4px 6px rgba(0, 0, 0, 0.28)) 
-                drop-shadow(-1px -1px 2px rgba(255, 255, 255, 0.9))
-                contrast(125%) 
-                brightness(95%);
-            transition: all 0.25s ease;
+        /* 🏷️ 로고 감싸는 입체 프레임 */
+        .brand-logo-wrapper {
+            background: #ffffff;
+            padding: 6px 12px;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06), 0 1px 2px rgba(0, 0, 0, 0.04);
+            border: 1px solid rgba(226, 232, 240, 0.9);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
         }
 
-        .brand-logo:hover {
-            transform: translateY(-2px) scale(1.03);
-            filter: 
-                drop-shadow(3px 6px 10px rgba(0, 0, 0, 0.35)) 
-                drop-shadow(-1px -1px 2px rgba(255, 255, 255, 1))
-                contrast(130%);
+        /* 🏷️ 로고 이미지 (왜곡/선명도 저하 해결) */
+        .brand-logo {
+            height: 46px;
+            width: auto;
+            max-width: 180px;
+            object-fit: contain;
+            display: block;
         }
 
         .brand-text h1 {
@@ -331,7 +331,7 @@
         @media (max-width: 640px) {
             body { padding: 16px 12px; }
             .header { flex-direction: column; align-items: flex-start; padding: 16px; }
-            .brand-logo { height: 42px; }
+            .brand-logo { height: 40px; }
             .btn-add-modal { width: 100%; justify-content: center; }
             .news-card { flex-direction: column; align-items: flex-start; gap: 12px; padding: 16px; }
             .card-info { flex-direction: column; align-items: flex-start; gap: 8px; }
@@ -345,10 +345,11 @@
         <!-- Header -->
         <div class="header">
             <div class="brand">
-                <!-- 이미지 파일명 뒤에 ?v=20260908-2 를 붙여 브라우저 캐시 생성을 방지합니다 -->
-                <img src="logo.jpg?v=20260908-2" alt="삼영운수 보영운수" class="brand-logo" onerror="this.style.display='none'">
+                <div class="brand-logo-wrapper">
+                    <img src="logo.jpg?v=20260908-3" alt="삼영운수 보영운수" class="brand-logo" onerror="this.parentElement.style.display='none'">
+                </div>
                 <div class="brand-text">
-                    <h1>삼영보영 주간 소식지 <span class="version-tag">v20260908-2</span></h1>
+                    <h1>삼영보영 주간 소식지 <span class="version-tag">v20260908-3</span></h1>
                     <p>항목을 클릭하면 고화질 소식지 원본을 확대 열람하실 수 있습니다.</p>
                 </div>
             </div>
@@ -413,7 +414,7 @@
     <!-- Viewer.js JS -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/viewerjs/1.11.6/viewer.min.js"></script>
     <script>
-        console.log("App Version: 20260908-2 Loaded");
+        console.log("App Version: 20260908-3 Loaded");
 
         const API_URL = "YOUR_GOOGLE_APPS_SCRIPT_URL";
         const ADMIN_PASSWORD = "1234";

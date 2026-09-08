@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>주간 소식지 대시보드 (테스트)</title>
+    <title>삼영보영 주간 소식지</title>
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@400;600;700&display=swap" rel="stylesheet">
     <!-- Viewer.js CSS (이미지 확대/축소 라이브러리) -->
@@ -30,11 +30,11 @@
         body {
             background-color: var(--bg-color);
             color: var(--text-main);
-            padding: 40px 20px;
+            padding: 24px 16px;
         }
 
         .container {
-            max-width: 1000px;
+            max-width: 900px;
             margin: 0 auto;
         }
 
@@ -43,19 +43,19 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 24px;
+            margin-bottom: 20px;
             flex-wrap: wrap;
-            gap: 16px;
+            gap: 12px;
         }
 
         .header-title {
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 8px;
         }
 
         .header-title h1 {
-            font-size: 1.75rem;
+            font-size: 1.5rem;
             font-weight: 700;
             color: var(--text-main);
         }
@@ -63,138 +63,118 @@
         .btn-add {
             background-color: #10b981;
             color: white;
-            padding: 12px 20px;
-            border-radius: 8px;
+            padding: 8px 14px;
+            border-radius: 6px;
             text-decoration: none;
             font-weight: 600;
-            font-size: 0.95rem;
-            box-shadow: 0 4px 6px -1px rgba(16, 185, 129, 0.2);
+            font-size: 0.85rem;
+            box-shadow: 0 2px 4px rgba(16, 185, 129, 0.2);
             transition: all 0.2s ease;
             display: inline-flex;
             align-items: center;
-            gap: 6px;
+            gap: 4px;
         }
 
         .btn-add:hover {
             background-color: #059669;
-            transform: translateY(-1px);
-        }
-
-        /* Search & Info Banner */
-        .banner {
-            background: linear-gradient(135deg, #2563eb 0%, #1e40af 100%);
-            color: white;
-            padding: 24px;
-            border-radius: 12px;
-            margin-bottom: 24px;
-            box-shadow: 0 10px 15px -3px rgba(37, 99, 235, 0.2);
-        }
-
-        .banner h2 {
-            font-size: 1.25rem;
-            margin-bottom: 8px;
-        }
-
-        .banner p {
-            font-size: 0.95rem;
-            opacity: 0.9;
         }
 
         /* News Card List */
         .news-grid {
             display: grid;
-            gap: 16px;
+            gap: 12px;
         }
 
         .news-card {
             background: var(--card-bg);
             border: 1px solid var(--border-color);
-            border-radius: 12px;
-            padding: 20px 24px;
+            border-radius: 10px;
+            padding: 16px 20px;
             display: flex;
             align-items: center;
             justify-content: space-between;
             transition: all 0.2s ease;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+            box-shadow: 0 1px 3px rgba(0,0,0,0.04);
             cursor: pointer;
+            gap: 12px;
         }
 
         .news-card:hover {
             border-color: var(--primary-color);
-            transform: translateY(-2px);
-            box-shadow: 0 8px 16px -4px rgba(0,0,0,0.1);
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
         }
 
         .card-info {
             display: flex;
             align-items: center;
-            gap: 20px;
+            gap: 14px;
             flex-grow: 1;
         }
 
         .date-badge {
             background-color: #eff6ff;
             color: var(--primary-color);
-            padding: 8px 14px;
-            border-radius: 8px;
+            padding: 6px 10px;
+            border-radius: 6px;
             font-weight: 700;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             white-space: nowrap;
         }
 
         .badge-new {
             background-color: #ef4444;
             color: white;
-            font-size: 0.75rem;
-            padding: 2px 6px;
+            font-size: 0.7rem;
+            padding: 1px 5px;
             border-radius: 4px;
-            margin-left: 6px;
+            margin-left: 4px;
             vertical-align: middle;
         }
 
         .card-title {
-            font-size: 1.05rem;
+            font-size: 0.98rem;
             font-weight: 600;
             color: var(--text-main);
             line-height: 1.4;
         }
 
+        /* 콤팩트하게 줄인 버튼 스타일 */
         .btn-view {
             background-color: var(--primary-color);
             color: white;
-            padding: 10px 16px;
-            border-radius: 6px;
-            font-size: 0.9rem;
-            font-weight: 600;
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-size: 0.8rem;
+            font-weight: 500;
             white-space: nowrap;
             display: inline-flex;
             align-items: center;
-            gap: 4px;
+            gap: 2px;
+            flex-shrink: 0;
         }
 
         .btn-view:hover {
             background-color: var(--primary-hover);
         }
 
-        /* Hidden Gallery for Viewer.js */
-        #gallery {
-            display: none;
-        }
-
         @media (max-width: 640px) {
+            body {
+                padding: 16px 10px;
+            }
             .news-card {
                 flex-direction: column;
                 align-items: flex-start;
-                gap: 14px;
+                gap: 10px;
+                padding: 14px 16px;
             }
             .card-info {
                 flex-direction: column;
                 align-items: flex-start;
-                gap: 10px;
+                gap: 8px;
             }
             .btn-view {
-                width: 100%;
-                justify-content: center;
+                align-self: flex-end;
             }
         }
     </style>
@@ -205,18 +185,12 @@
         <!-- Header -->
         <div class="header">
             <div class="header-title">
-                <span>📢</span>
-                <h1>주간 소식지 안내</h1>
+                <span>🚌</span>
+                <h1>삼영보영 주간 소식지</h1>
             </div>
             <a href="YOUR_GOOGLE_FORM_URL" target="_blank" class="btn-add">
                 <span>+</span> 새 소식지 작성하기
             </a>
-        </div>
-
-        <!-- Banner -->
-        <div class="banner">
-            <h2>스마트 소식지 관리 시스템</h2>
-            <p>항목을 클릭하면 고화질 이미지 원본을 확대/축소하여 열람하실 수 있습니다.</p>
         </div>
 
         <!-- News List -->
@@ -225,47 +199,47 @@
             <div class="news-card" data-img="https://picsum.photos/1200/1600?random=1">
                 <div class="card-info">
                     <span class="date-badge">2026-08-31 <span class="badge-new">NEW</span></span>
-                    <span class="card-title">8월 5주차 전기버스 화재대비훈련·소급 급여명세서 교부 및 신호위반 예방</span>
+                    <span class="card-title">전기버스 화재대비훈련·소급 급여명세서 교부 및 신호위반 예방</span>
                 </div>
-                <div class="btn-view">🔍 원본 이미지 보기</div>
+                <div class="btn-view">🔍 보기</div>
             </div>
 
             <div class="news-card" data-img="https://picsum.photos/1200/1600?random=2">
                 <div class="card-info">
                     <span class="date-badge">2026-08-24</span>
-                    <span class="card-title">8월 4주차 경기프리미엄 P9902 개통·8-2번 우회운행 및 쿨스카프 지급</span>
+                    <span class="card-title">경기프리미엄 P9902 개통·8-2번 우회운행 및 쿨스카프 지급</span>
                 </div>
-                <div class="btn-view">🔍 원본 이미지 보기</div>
+                <div class="btn-view">🔍 보기</div>
             </div>
 
             <div class="news-card" data-img="https://picsum.photos/1200/1600?random=3">
                 <div class="card-info">
                     <span class="date-badge">2026-08-17</span>
-                    <span class="card-title">8월 3주차 잠실역 환승센터 PSD 주의·운자가격증명 게시 및 폭염 온열질환 예방</span>
+                    <span class="card-title">잠실역 환승센터 PSD 주의·운자가격증명 게시 및 폭염 온열질환 예방</span>
                 </div>
-                <div class="btn-view">🔍 원본 이미지 보기</div>
+                <div class="btn-view">🔍 보기</div>
             </div>
 
             <div class="news-card" data-img="https://picsum.photos/1200/1600?random=4">
                 <div class="card-info">
                     <span class="date-badge">2026-01-12</span>
-                    <span class="card-title">1월 2주차 P9901 시간조정·운휴 저상버스 투입 및 우회전 일시정지 수칙</span>
+                    <span class="card-title">P9901 시간조정·운휴 저상버스 투입 및 우회전 일시정지 수칙</span>
                 </div>
-                <div class="btn-view">🔍 원본 이미지 보기</div>
+                <div class="btn-view">🔍 보기</div>
             </div>
 
             <div class="news-card" data-img="https://picsum.photos/1200/1600?random=5">
                 <div class="card-info">
                     <span class="date-badge">2026-01-05</span>
-                    <span class="card-title">1월 1주차 故 신관선 회장 1주기 추모·연말정산 안내 및 혹한기 안전운행</span>
+                    <span class="card-title">故 신관선 회장 1주기 추모·연말정산 안내 및 혹한기 안전운행</span>
                 </div>
-                <div class="btn-view">🔍 원본 이미지 보기</div>
+                <div class="btn-view">🔍 보기</div>
             </div>
 
         </div>
     </div>
 
-    <!-- Viewer.js JS (이미지 팝업 & Zoom 스크립트) -->
+    <!-- Viewer.js JS -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/viewerjs/1.11.6/viewer.min.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
@@ -275,7 +249,6 @@
                 card.addEventListener('click', () => {
                     const imgSrc = card.getAttribute('data-img');
                     
-                    // 임시 이미지 태그 생성 후 Viewer.js 실행
                     const img = document.createElement('img');
                     img.src = imgSrc;
                     

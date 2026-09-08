@@ -2,19 +2,18 @@
 <!--
     ==================================================
     PROJECT: 삼영보영 주간 소식지 Web Viewer
-    VERSION: 20260908-4
+    VERSION: 20260908-5
     LAST UPDATED: 2026-09-08
     CHANGES: 
-    - 로고 테두리 부드럽고 자연스럽게 그림자 스타일로 변경
-    - 버전 정보 태그 바탕색 및 둥근 배지 디테일 개선
-    - '+ 새 소식지 작성' 버튼을 목록 하단으로 이동하여 헤더 시가성 강화
+    - '+ 새 소식지 작성' 버튼 원래 위치(상단 우측)로 복원
+    - 버전 정보 배지 바탕색을 더욱 은은하고 부드럽게 조정
     ==================================================
 -->
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>삼영보영 주간 소식지 (v20260908-4)</title>
+    <title>삼영보영 주간 소식지 (v20260908-5)</title>
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <!-- Viewer.js CSS (이미지 줌) -->
@@ -43,7 +42,7 @@
         body {
             background-color: var(--bg-body);
             color: var(--text-main);
-            padding: 36px 16px;
+            padding: 32px 16px;
             -webkit-font-smoothing: antialiased;
             position: relative;
             min-height: 100vh;
@@ -74,8 +73,10 @@
         /* Header Section */
         .header {
             display: flex;
+            justify-content: space-between;
             align-items: center;
             margin-bottom: 24px;
+            gap: 16px;
             background: rgba(255, 255, 255, 0.85);
             padding: 20px 26px;
             border-radius: 18px;
@@ -90,7 +91,7 @@
             gap: 18px;
         }
 
-        /* 🏷️ 부드러운 로고 프레임 (자연스러운 미세 그림자) */
+        /* 🏷️ 자연스러운 로고 프레임 (부드러운 미세 그림자) */
         .brand-logo-wrapper {
             background: #ffffff;
             padding: 8px 14px;
@@ -102,7 +103,7 @@
             flex-shrink: 0;
         }
 
-        /* 🏷️ 로고 이미지 원본 선명도 유지 */
+        /* 🏷️ 로고 이미지 원본 그대로 표시 */
         .brand-logo {
             height: 44px;
             width: auto;
@@ -118,25 +119,49 @@
             letter-spacing: -0.5px;
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 8px;
         }
 
-        /* 🏷️ 깔끔해진 버젼 정보 바탕색 */
+        /* 🏷️ 한층 더 은은하고 부드러운 버젼 태그 */
         .version-tag {
-            font-size: 0.72rem;
+            font-size: 0.7rem;
             font-weight: 600;
-            color: #1e40af;
-            background: rgba(30, 64, 175, 0.08);
+            color: #64748b;
+            background: rgba(226, 232, 240, 0.55);
             padding: 3px 8px;
             border-radius: 20px;
-            letter-spacing: 0.3px;
+            letter-spacing: 0.2px;
             font-family: -apple-system, BlinkMacSystemFont, monospace;
+            border: 1px solid rgba(203, 213, 225, 0.4);
         }
 
         .brand-text p {
             font-size: 0.86rem;
             color: var(--text-sub);
             margin-top: 3px;
+        }
+
+        /* ➕ 상단 우측 원래 위치 작성 버튼 */
+        .btn-add-modal {
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 10px;
+            border: none;
+            font-weight: 700;
+            font-size: 0.9rem;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(16, 185, 129, 0.22);
+            transition: all 0.2s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            white-space: nowrap;
+        }
+
+        .btn-add-modal:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(16, 185, 129, 0.32);
         }
 
         /* News Card Grid */
@@ -224,35 +249,6 @@
             color: white;
         }
 
-        /* ➕ 하단 새 소식지 작성 영역 */
-        .bottom-action-area {
-            margin-top: 24px;
-            display: flex;
-            justify-content: center;
-        }
-
-        .btn-add-modal {
-            background: linear-gradient(135deg, #059669 0%, #047857 100%);
-            color: white;
-            padding: 12px 28px;
-            border-radius: 12px;
-            border: none;
-            font-weight: 700;
-            font-size: 0.95rem;
-            cursor: pointer;
-            box-shadow: 0 4px 14px rgba(5, 150, 105, 0.22);
-            transition: all 0.25s ease;
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .btn-add-modal:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(5, 150, 105, 0.35);
-            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
-        }
-
         /* Modal Styles */
         .modal-overlay {
             position: fixed;
@@ -337,12 +333,12 @@
 
         @media (max-width: 640px) {
             body { padding: 16px 12px; }
-            .header { padding: 16px; }
+            .header { flex-direction: column; align-items: flex-start; padding: 16px; gap: 12px; }
             .brand-logo { height: 38px; }
+            .btn-add-modal { width: 100%; justify-content: center; }
             .news-card { flex-direction: column; align-items: flex-start; gap: 12px; padding: 16px; }
             .card-info { flex-direction: column; align-items: flex-start; gap: 8px; }
             .btn-view { align-self: flex-end; }
-            .btn-add-modal { width: 100%; justify-content: center; }
         }
     </style>
 </head>
@@ -353,13 +349,15 @@
         <div class="header">
             <div class="brand">
                 <div class="brand-logo-wrapper">
-                    <img src="logo.jpg?v=20260908-4" alt="삼영운수 보영운수" class="brand-logo" onerror="this.parentElement.style.display='none'">
+                    <img src="logo.jpg?v=20260908-5" alt="삼영운수 보영운수" class="brand-logo" onerror="this.parentElement.style.display='none'">
                 </div>
                 <div class="brand-text">
-                    <h1>삼영보영 주간 소식지 <span class="version-tag">v20260908-4</span></h1>
+                    <h1>삼영보영 주간 소식지 <span class="version-tag">v20260908-5</span></h1>
                     <p>항목을 클릭하면 고화질 소식지 원본을 확대 열람하실 수 있습니다.</p>
                 </div>
             </div>
+            <!-- 원래 우측 상단 위치 -->
+            <button class="btn-add-modal" onclick="openModal()">+ 새 소식지 작성</button>
         </div>
 
         <!-- News Grid List -->
@@ -389,13 +387,6 @@
                 <div class="btn-view">🔍 보기</div>
             </div>
 
-        </div>
-
-        <!-- ➕ 목록 하단 작성 버튼 영역 -->
-        <div class="bottom-action-area">
-            <button class="btn-add-modal" onclick="openModal()">
-                <span>+ 새 소식지 작성하기</span>
-            </button>
         </div>
     </div>
 
@@ -427,7 +418,7 @@
     <!-- Viewer.js JS -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/viewerjs/1.11.6/viewer.min.js"></script>
     <script>
-        console.log("App Version: 20260908-4 Loaded");
+        console.log("App Version: 20260908-5 Loaded");
 
         const API_URL = "YOUR_GOOGLE_APPS_SCRIPT_URL";
         const ADMIN_PASSWORD = "1234";

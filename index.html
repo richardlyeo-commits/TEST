@@ -14,7 +14,7 @@
             --primary: #1e40af;
             --primary-hover: #1d4ed8;
             --bg-body: #f8fafc;
-            --card-bg: rgba(255, 255, 255, 0.92);
+            --card-bg: rgba(255, 255, 255, 0.90);
             --text-main: #0f172a;
             --text-sub: #475569;
             --border-color: rgba(226, 232, 240, 0.8);
@@ -38,7 +38,7 @@
             min-height: 100vh;
         }
 
-        /* 수채화 은은한 배경 레이어 */
+        /* 🖼️ 수채화 은은한 전체 배경 레이어 */
         body::before {
             content: "";
             position: fixed;
@@ -46,14 +46,14 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-image: url('bg.jpg'); 
+            /* 깃허브에 올린 수채화 이미지 파일명(bg.jpg)을 적어주세요 */
+            background-image: url('bg.jpg');
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
-            opacity: 0.18;
+            opacity: 0.25; /* 은은한 투명도 */
             z-index: -1;
             pointer-events: none;
-            filter: blur(1px);
         }
 
         .container {
@@ -69,11 +69,11 @@
             margin-bottom: 24px;
             gap: 16px;
             background: rgba(255, 255, 255, 0.85);
-            padding: 16px 20px;
+            padding: 18px 24px;
             border-radius: 16px;
-            backdrop-filter: blur(8px);
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
-            border: 1px solid rgba(255, 255, 255, 0.6);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.8);
         }
 
         .brand {
@@ -82,13 +82,13 @@
             gap: 16px;
         }
 
-        /* 로고가 수채화 배경에 은은하게 스며들도록 스타일 추가 */
+        /* 🏷️ 로고: 선명하면서 배경에 스며들도록 조정 */
         .brand-logo {
-            height: 48px;
+            height: 52px;
             width: auto;
             object-fit: contain;
-            mix-blend-mode: multiply; /* 흰색 배경을 없애고 로고 선만 배경에 스며들게 함 */
-            opacity: 0.85;            /* 은은한 질감을 위해 투명도 살짝 적용 */
+            mix-blend-mode: multiply; /* 흰 배경 투명화 및 자연스러운 스머징 */
+            filter: contract(110%) brightness(95%); /* 선명도 보정 */
         }
 
         .brand-text h1 {
@@ -296,7 +296,7 @@
         @media (max-width: 640px) {
             body { padding: 16px 12px; }
             .header { flex-direction: column; align-items: flex-start; padding: 16px; }
-            .brand-logo { height: 38px; }
+            .brand-logo { height: 42px; }
             .btn-add-modal { width: 100%; justify-content: center; }
             .news-card { flex-direction: column; align-items: flex-start; gap: 12px; padding: 16px; }
             .card-info { flex-direction: column; align-items: flex-start; gap: 8px; }
@@ -310,6 +310,7 @@
         <!-- Header -->
         <div class="header">
             <div class="brand">
+                <!-- 로고 이미지 파일명이 logo.jpg인지 확인해주세요 -->
                 <img src="logo.jpg" alt="삼영운수 보영운수" class="brand-logo" onerror="this.style.display='none'">
                 <div class="brand-text">
                     <h1>삼영보영 주간 소식지</h1>

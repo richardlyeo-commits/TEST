@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>소식지 안내 (테스트)</title>
+    <style>
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+            max-width: 800px;
+            margin: 30px auto;
+            padding: 0 20px;
+            background-color: #f8f9fa;
+        }
+        h1 {
+            color: #333;
+            border-bottom: 2px solid #007bff;
+            padding-bottom: 10px;
+        }
+        .btn-container {
+            margin: 20px 0;
+            text-align: right;
+        }
+        .btn-form {
+            background-color: #28a745;
+            color: white;
+            padding: 10px 18px;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            display: inline-block;
+        }
+        .btn-form:hover {
+            background-color: #218838;
+        }
+        .news-list {
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        .news-item {
+            padding: 15px 20px;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .news-item:last-child {
+            border-bottom: none;
+        }
+        .news-date {
+            font-weight: bold;
+            color: #007bff;
+            width: 110px;
+            flex-shrink: 0;
+        }
+        .news-title {
+            flex-grow: 1;
+            margin: 0 15px;
+            color: #444;
+        }
+        .btn-link {
+            background-color: #007bff;
+            color: white;
+            padding: 6px 12px;
+            text-decoration: none;
+            border-radius: 4px;
+            font-size: 0.9em;
+        }
+        .btn-link:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>📄 주간 소식지 안내 (테스트)</h1>
+
+    <!-- 1. 새 소식지 입력 구글 폼 연결 버튼 -->
+    <div class="btn-container">
+        <a href="YOUR_GOOGLE_FORM_URL" target="_blank" class="btn-form">+ 새 소식지 및 요약 작성하기</a>
+    </div>
+
+    <!-- 2. 소식지 목록 화면 -->
+    <div class="news-list" id="newsList">
+        <!-- 기존 NEWS_INDEX 데이터 목록 -->
+        <div class="news-item">
+            <span class="news-date">2026-08-31</span>
+            <span class="news-title">8월 5주차 전기버스 화재대비훈련·소급 급여명세서 교부 및 신호위반 예방</span>
+            <a href="#" class="btn-link" onclick="alert('테스트용 링크입니다.'); return false;">PDF 열기</a>
+        </div>
+        <div class="news-item">
+            <span class="news-date">2026-08-24</span>
+            <span class="news-title">8월 4주차 경기프리미엄 P9902 개통·8-2번 우회운행 및 쿨스카프 지급</span>
+            <a href="#" class="btn-link" onclick="alert('테스트용 링크입니다.'); return false;">PDF 열기</a>
+        </div>
+        <div class="news-item">
+            <span class="news-date">2026-08-17</span>
+            <span class="news-title">8월 3주차 잠실역 환승센터 PSD 주의·운자가격증명 게시 및 폭염 온열질환 예방</span>
+            <a href="#" class="btn-link" onclick="alert('테스트용 링크입니다.'); return false;">PDF 열기</a>
+        </div>
+        <div class="news-item">
+            <span class="news-date">2026-01-12</span>
+            <span class="news-title">1월 2주차 P9901 시간조정·운휴 저상버스 투입 및 우회전 일시정지 수칙</span>
+            <a href="#" class="btn-link" onclick="alert('테스트용 링크입니다.'); return false;">PDF 열기</a>
+        </div>
+        <div class="news-item">
+            <span class="news-date">2026-01-05</span>
+            <span class="news-title">1월 1주차 故 신관선 회장 1주기 추모·연말정산 안내 및 혹한기 안전운행</span>
+            <a href="#" class="btn-link" onclick="alert('테스트용 링크입니다.'); return false;">PDF 열기</a>
+        </div>
+    </div>
+
+</body>
+</html>

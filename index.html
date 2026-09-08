@@ -14,10 +14,10 @@
             --primary: #1e40af;
             --primary-hover: #1d4ed8;
             --bg-body: #f8fafc;
-            --card-bg: #ffffff;
+            --card-bg: rgba(255, 255, 255, 0.92); /* 수채화 배경 위에서 잘 보이도록 반투명 흰색 적용 */
             --text-main: #0f172a;
             --text-sub: #475569;
-            --border-color: #e2e8f0;
+            --border-color: rgba(226, 232, 240, 0.8);
             --accent-green: #059669;
             --accent-red: #ef4444;
         }
@@ -34,6 +34,27 @@
             color: var(--text-main);
             padding: 32px 16px;
             -webkit-font-smoothing: antialiased;
+            position: relative;
+            min-height: 100vh;
+        }
+
+        /* 수채화 은은한 배경 레이어 */
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            /* 수채화 이미지 파일명 (bg.jpg로 올려주세요) */
+            background-image: url('bg.jpg'); 
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            opacity: 0.18; /* 은은한 투명도 (0.15 ~ 0.25 추천) */
+            z-index: -1;
+            pointer-events: none;
+            filter: blur(1px); /* 부드러운 수채화 질감 강화 */
         }
 
         .container {
@@ -41,13 +62,19 @@
             margin: 0 auto;
         }
 
-        /* Header Section with Company Logo */
+        /* Header Section */
         .header {
             display: flex;
             justify-content: space-between;
             align-items: center;
             margin-bottom: 24px;
             gap: 16px;
+            background: rgba(255, 255, 255, 0.85);
+            padding: 16px 20px;
+            border-radius: 16px;
+            backdrop-filter: blur(8px);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.6);
         }
 
         .brand {
@@ -63,7 +90,7 @@
         }
 
         .brand-text h1 {
-            font-size: 1.5rem;
+            font-size: 1.45rem;
             font-weight: 800;
             color: var(--text-main);
             letter-spacing: -0.5px;
@@ -89,6 +116,7 @@
             display: inline-flex;
             align-items: center;
             gap: 6px;
+            white-space: nowrap;
         }
 
         .btn-add-modal:hover {
@@ -104,6 +132,7 @@
 
         .news-card {
             background: var(--card-bg);
+            backdrop-filter: blur(10px);
             border: 1px solid var(--border-color);
             border-radius: 14px;
             padding: 18px 24px;
@@ -111,7 +140,7 @@
             align-items: center;
             justify-content: space-between;
             transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-            box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
             cursor: pointer;
             gap: 16px;
         }
@@ -119,7 +148,8 @@
         .news-card:hover {
             border-color: #93c5fd;
             transform: translateY(-2px);
-            box-shadow: 0 10px 20px -5px rgba(30, 64, 175, 0.08);
+            background: rgba(255, 255, 255, 0.98);
+            box-shadow: 0 10px 25px -5px rgba(30, 64, 175, 0.12);
         }
 
         .card-info {
@@ -187,7 +217,7 @@
             width: 100%;
             height: 100%;
             background: rgba(15, 23, 42, 0.6);
-            backdrop-filter: blur(4px);
+            backdrop-filter: blur(6px);
             display: none;
             justify-content: center;
             align-items: center;
@@ -238,7 +268,7 @@
         .form-control {
             width: 100%;
             padding: 10px 14px;
-            border: 1px solid var(--border-color);
+            border: 1px solid #cbd5e1;
             border-radius: 8px;
             font-size: 0.95rem;
         }
@@ -263,7 +293,7 @@
 
         @media (max-width: 640px) {
             body { padding: 16px 12px; }
-            .header { flex-direction: column; align-items: flex-start; }
+            .header { flex-direction: column; align-items: flex-start; padding: 16px; }
             .brand-logo { height: 38px; }
             .btn-add-modal { width: 100%; justify-content: center; }
             .news-card { flex-direction: column; align-items: flex-start; gap: 12px; padding: 16px; }
@@ -278,7 +308,6 @@
         <!-- Header -->
         <div class="header">
             <div class="brand">
-                <!-- 회사 로고 이미지 경로 (logo.jpg로 업로드 후 적용) -->
                 <img src="logo.jpg" alt="삼영운수 보영운수" class="brand-logo" onerror="this.style.display='none'">
                 <div class="brand-text">
                     <h1>삼영보영 주간 소식지</h1>
@@ -291,7 +320,6 @@
         <!-- News Grid List -->
         <div class="news-grid" id="newsGrid">
             
-            <!-- 기존 소식지 파일 연결 샘플 -->
             <div class="news-card" data-img="https://picsum.photos/1200/1600?random=1">
                 <div class="card-info">
                     <span class="date-badge">2026-08-31 <span class="badge-new">NEW</span></span>

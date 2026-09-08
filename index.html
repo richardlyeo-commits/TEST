@@ -5,177 +5,294 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>삼영보영 주간 소식지</title>
     <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@400;600;700&display=swap" rel="stylesheet">
-    <!-- Viewer.js CSS (이미지 확대/축소 라이브러리) -->
+    <link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Viewer.js CSS (이미지 줌) -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/viewerjs/1.11.6/viewer.min.css">
     
     <style>
         :root {
-            --primary-color: #2563eb;
+            --primary: #1e40af;
             --primary-hover: #1d4ed8;
-            --bg-color: #f1f5f9;
+            --bg-body: #f8fafc;
             --card-bg: #ffffff;
             --text-main: #0f172a;
             --text-sub: #475569;
             --border-color: #e2e8f0;
+            --accent-green: #059669;
+            --accent-red: #ef4444;
         }
 
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
-            font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, Roboto, sans-serif;
+            font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif;
         }
 
         body {
-            background-color: var(--bg-color);
+            background-color: var(--bg-body);
             color: var(--text-main);
-            padding: 24px 16px;
+            padding: 32px 16px;
+            -webkit-font-smoothing: antialiased;
         }
 
         .container {
-            max-width: 900px;
+            max-width: 920px;
             margin: 0 auto;
         }
 
-        /* Header Section */
+        /* Top Header Area */
         .header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 20px;
-            flex-wrap: wrap;
+            margin-bottom: 24px;
+            gap: 16px;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
             gap: 12px;
         }
 
-        .header-title {
+        .brand-icon {
+            background: #dbeafe;
+            color: var(--primary);
+            width: 44px;
+            height: 44px;
+            border-radius: 12px;
             display: flex;
             align-items: center;
-            gap: 8px;
+            justify-content: center;
+            font-size: 1.4rem;
         }
 
-        .header-title h1 {
+        .brand-text h1 {
             font-size: 1.5rem;
-            font-weight: 700;
+            font-weight: 800;
             color: var(--text-main);
+            letter-spacing: -0.5px;
         }
 
-        .btn-add {
-            background-color: #10b981;
-            color: white;
-            padding: 8px 14px;
-            border-radius: 6px;
-            text-decoration: none;
-            font-weight: 600;
+        .brand-text p {
             font-size: 0.85rem;
-            box-shadow: 0 2px 4px rgba(16, 185, 129, 0.2);
+            color: var(--text-sub);
+            margin-top: 2px;
+        }
+
+        .btn-add-modal {
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            color: white;
+            padding: 10px 18px;
+            border-radius: 10px;
+            border: none;
+            font-weight: 700;
+            font-size: 0.9rem;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(16, 185, 129, 0.25);
             transition: all 0.2s ease;
             display: inline-flex;
             align-items: center;
-            gap: 4px;
+            gap: 6px;
         }
 
-        .btn-add:hover {
-            background-color: #059669;
+        .btn-add-modal:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(16, 185, 129, 0.35);
         }
 
-        /* News Card List */
+        /* News Card Grid */
         .news-grid {
             display: grid;
-            gap: 12px;
+            gap: 14px;
         }
 
         .news-card {
             background: var(--card-bg);
             border: 1px solid var(--border-color);
-            border-radius: 10px;
-            padding: 16px 20px;
+            border-radius: 14px;
+            padding: 18px 24px;
             display: flex;
             align-items: center;
             justify-content: space-between;
-            transition: all 0.2s ease;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.02);
             cursor: pointer;
-            gap: 12px;
+            gap: 16px;
         }
 
         .news-card:hover {
-            border-color: var(--primary-color);
-            transform: translateY(-1px);
-            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            border-color: #93c5fd;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px -5px rgba(30, 64, 175, 0.08);
         }
 
         .card-info {
             display: flex;
             align-items: center;
-            gap: 14px;
+            gap: 16px;
             flex-grow: 1;
         }
 
         .date-badge {
             background-color: #eff6ff;
-            color: var(--primary-color);
-            padding: 6px 10px;
-            border-radius: 6px;
+            color: var(--primary);
+            padding: 6px 12px;
+            border-radius: 8px;
             font-weight: 700;
-            font-size: 0.85rem;
+            font-size: 0.88rem;
             white-space: nowrap;
+            letter-spacing: -0.2px;
         }
 
         .badge-new {
-            background-color: #ef4444;
+            background-color: var(--accent-red);
             color: white;
-            font-size: 0.7rem;
-            padding: 1px 5px;
+            font-size: 0.68rem;
+            padding: 2px 6px;
             border-radius: 4px;
-            margin-left: 4px;
+            margin-left: 6px;
             vertical-align: middle;
+            font-weight: 800;
         }
 
         .card-title {
-            font-size: 0.98rem;
+            font-size: 1rem;
             font-weight: 600;
             color: var(--text-main);
-            line-height: 1.4;
+            line-height: 1.45;
+            word-break: keep-all;
         }
 
-        /* 콤팩트하게 줄인 버튼 스타일 */
         .btn-view {
-            background-color: var(--primary-color);
-            color: white;
-            padding: 5px 10px;
-            border-radius: 5px;
-            font-size: 0.8rem;
-            font-weight: 500;
+            background-color: #f1f5f9;
+            color: var(--text-sub);
+            padding: 6px 12px;
+            border-radius: 8px;
+            font-size: 0.82rem;
+            font-weight: 600;
             white-space: nowrap;
             display: inline-flex;
             align-items: center;
-            gap: 2px;
+            gap: 4px;
+            transition: all 0.2s;
             flex-shrink: 0;
         }
 
-        .btn-view:hover {
+        .news-card:hover .btn-view {
+            background-color: var(--primary);
+            color: white;
+        }
+
+        /* Modal Popup Styles */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(15, 23, 42, 0.6);
+            backdrop-filter: blur(4px);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            padding: 20px;
+        }
+
+        .modal-card {
+            background: white;
+            width: 100%;
+            max-width: 500px;
+            border-radius: 16px;
+            padding: 28px;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.2);
+            animation: modalUp 0.25s ease-out;
+        }
+
+        @keyframes modalUp {
+            from { transform: translateY(20px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .modal-header h2 {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--text-main);
+        }
+
+        .btn-close {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--text-sub);
+            cursor: pointer;
+        }
+
+        .form-group {
+            margin-bottom: 16px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 0.88rem;
+            font-weight: 600;
+            color: var(--text-main);
+            margin-bottom: 6px;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 10px 14px;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            font-size: 0.95rem;
+            outline: none;
+            transition: border 0.2s;
+        }
+
+        .form-control:focus {
+            border-color: var(--primary);
+        }
+
+        textarea.form-control {
+            resize: vertical;
+            height: 90px;
+        }
+
+        .btn-submit {
+            width: 100%;
+            background-color: var(--primary);
+            color: white;
+            padding: 12px;
+            border-radius: 10px;
+            border: none;
+            font-weight: 700;
+            font-size: 1rem;
+            cursor: pointer;
+            margin-top: 10px;
+            transition: background 0.2s;
+        }
+
+        .btn-submit:hover {
             background-color: var(--primary-hover);
         }
 
         @media (max-width: 640px) {
-            body {
-                padding: 16px 10px;
-            }
-            .news-card {
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 10px;
-                padding: 14px 16px;
-            }
-            .card-info {
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 8px;
-            }
-            .btn-view {
-                align-self: flex-end;
-            }
+            body { padding: 16px 12px; }
+            .header { flex-direction: column; align-items: flex-start; }
+            .btn-add-modal { width: 100%; justify-content: center; }
+            .news-card { flex-direction: column; align-items: flex-start; gap: 12px; padding: 16px; }
+            .card-info { flex-direction: column; align-items: flex-start; gap: 8px; }
+            .btn-view { align-self: flex-end; }
         }
     </style>
 </head>
@@ -184,16 +301,17 @@
     <div class="container">
         <!-- Header -->
         <div class="header">
-            <div class="header-title">
-                <span>🚌</span>
-                <h1>삼영보영 주간 소식지</h1>
+            <div class="brand">
+                <div class="brand-icon">🚌</div>
+                <div class="brand-text">
+                    <h1>삼영보영 주간 소식지</h1>
+                    <p>항목을 클릭하면 고화질 소식지 원본을 확대 열람하실 수 있습니다.</p>
+                </div>
             </div>
-            <a href="YOUR_GOOGLE_FORM_URL" target="_blank" class="btn-add">
-                <span>+</span> 새 소식지 작성하기
-            </a>
+            <button class="btn-add-modal" onclick="openModal()">+ 새 소식지 작성</button>
         </div>
 
-        <!-- News List -->
+        <!-- News Grid List -->
         <div class="news-grid" id="newsGrid">
             
             <div class="news-card" data-img="https://picsum.photos/1200/1600?random=1">
@@ -220,60 +338,130 @@
                 <div class="btn-view">🔍 보기</div>
             </div>
 
-            <div class="news-card" data-img="https://picsum.photos/1200/1600?random=4">
-                <div class="card-info">
-                    <span class="date-badge">2026-01-12</span>
-                    <span class="card-title">P9901 시간조정·운휴 저상버스 투입 및 우회전 일시정지 수칙</span>
-                </div>
-                <div class="btn-view">🔍 보기</div>
-            </div>
+        </div>
+    </div>
 
-            <div class="news-card" data-img="https://picsum.photos/1200/1600?random=5">
-                <div class="card-info">
-                    <span class="date-badge">2026-01-05</span>
-                    <span class="card-title">故 신관선 회장 1주기 추모·연말정산 안내 및 혹한기 안전운행</span>
-                </div>
-                <div class="btn-view">🔍 보기</div>
+    <!-- 작성 팝업 (Modal) -->
+    <div class="modal-overlay" id="addModal">
+        <div class="modal-card">
+            <div class="modal-header">
+                <h2>새 소식지 등록</h2>
+                <button class="btn-close" onclick="closeModal()">&times;</button>
             </div>
-
+            <form id="uploadForm" onsubmit="handleFormSubmit(event)">
+                <div class="form-group">
+                    <label for="newsDate">발행 일자</label>
+                    <input type="date" id="newsDate" class="form-control" required>
+                </div>
+                <div class="form-group">
+                    <label for="newsTitle">소식지 요약 내용</label>
+                    <textarea id="newsTitle" class="form-control" placeholder="주요 소식 요약 문구를 입력하세요" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="newsFile">소식지 이미지 파일 (JPG, PNG)</label>
+                    <input type="file" id="newsFile" class="form-control" accept="image/*" required>
+                </div>
+                <button type="submit" class="btn-submit" id="submitBtn">소식지 등록하기</button>
+            </form>
         </div>
     </div>
 
     <!-- Viewer.js JS -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/viewerjs/1.11.6/viewer.min.js"></script>
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const cards = document.querySelectorAll('.news-card');
+        // 백엔드 API 주소 (구글 앱스 스크립트 배포 URL로 교체)
+        const API_URL = "YOUR_GOOGLE_APPS_SCRIPT_URL";
 
+        document.addEventListener('DOMContentLoaded', () => {
+            initViewer();
+            // 기본 날짜를 오늘로 설정
+            document.getElementById('newsDate').valueAsDate = new Date();
+        });
+
+        // 모달 열기/닫기
+        function openModal() {
+            document.getElementById('addModal').style.display = 'flex';
+        }
+        function closeModal() {
+            document.getElementById('addModal').style.display = 'none';
+        }
+
+        // Viewer.js 이벤트 바인딩
+        function initViewer() {
+            const cards = document.querySelectorAll('.news-card');
             cards.forEach(card => {
                 card.addEventListener('click', () => {
                     const imgSrc = card.getAttribute('data-img');
-                    
+                    if (!imgSrc) {
+                        alert("등록된 소식지 이미지가 없습니다.");
+                        return;
+                    }
                     const img = document.createElement('img');
                     img.src = imgSrc;
                     
                     const viewer = new Viewer(img, {
-                        hidden() {
-                            viewer.destroy();
-                        },
+                        hidden() { viewer.destroy(); },
                         navbar: false,
                         title: false,
                         toolbar: {
-                            zoomIn: 1,
-                            zoomOut: 1,
-                            oneToOne: 1,
-                            reset: 1,
-                            rotateLeft: 1,
-                            rotateRight: 1,
-                            flipHorizontal: 0,
-                            flipVertical: 0,
-                        },
+                            zoomIn: 1, zoomOut: 1, oneToOne: 1, reset: 1,
+                            rotateLeft: 1, rotateRight: 1, flipHorizontal: 0, flipVertical: 0
+                        }
                     });
-                    
                     viewer.show();
                 });
             });
-        });
+        }
+
+        // 직접 작성 폼 제출 처리 (Base64 인코딩 업로드)
+        async function handleFormSubmit(e) {
+            e.preventDefault();
+
+            const submitBtn = document.getElementById('submitBtn');
+            const date = document.getElementById('newsDate').value;
+            const title = document.getElementById('newsTitle').value;
+            const fileInput = document.getElementById('newsFile');
+
+            if (fileInput.files.length === 0) return;
+
+            const file = fileInput.files[0];
+            const reader = new FileReader();
+
+            submitBtn.disabled = true;
+            submitBtn.innerText = "업로드 중...";
+
+            reader.onload = async function() {
+                const base64Data = reader.result.split(',')[1];
+                
+                const payload = {
+                    date: date,
+                    title: title,
+                    filename: file.name,
+                    mimeType: file.type,
+                    fileData: base64Data
+                };
+
+                try {
+                    // 앱스 스크립트로 POST 전송
+                    await fetch(API_URL, {
+                        method: 'POST',
+                        body: JSON.stringify(payload)
+                    });
+
+                    alert("소식지가 성공적으로 등록되었습니다!");
+                    closeModal();
+                    location.reload(); // 등록 후 목록 갱신
+                } catch (error) {
+                    console.error("등록 실패:", error);
+                    alert("등록 중 오류가 발생했습니다.");
+                } finally {
+                    submitBtn.disabled = false;
+                    submitBtn.innerText = "소식지 등록하기";
+                }
+            };
+
+            reader.readAsDataURL(file);
+        }
     </script>
 </body>
 </html>

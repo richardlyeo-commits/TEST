@@ -81,13 +81,22 @@
             gap: 16px;
         }
 
-        /* 🏷️ 로고: 선명하면서 배경에 스며들도록 조정 */
+        /* 🏷️ 로고: 선명함 + 은은한 입체 그림자 적용 */
         .brand-logo {
             height: 52px;
             width: auto;
             object-fit: contain;
             mix-blend-mode: multiply;
-            filter: contrast(110%) brightness(95%);
+            filter: 
+                drop-shadow(1px 2px 3px rgba(0, 0, 0, 0.18)) 
+                drop-shadow(0px 0px 1px rgba(255, 255, 255, 0.8))
+                contrast(115%) 
+                brightness(96%);
+            transition: transform 0.2s ease;
+        }
+
+        .brand-logo:hover {
+            transform: scale(1.02);
         }
 
         .brand-text h1 {
@@ -378,21 +387,18 @@
     <script>
         const API_URL = "YOUR_GOOGLE_APPS_SCRIPT_URL";
         
-        // 🔒 관리자 비밀번호 설정 (원하는 암호로 변경 가능)
-        const ADMIN_PASSWORD = "1077";
+        // 🔒 관리자 비밀번호 설정
+        const ADMIN_PASSWORD = "1234";
 
         document.addEventListener('DOMContentLoaded', () => {
             initViewer();
             document.getElementById('newsDate').valueAsDate = new Date();
         });
 
-        // 비밀번호 확인 후 작성 팝업 열기
         function openModal() {
             const userInput = prompt("관리자 비밀번호를 입력해주세요:");
             
-            if (userInput === null) {
-                return; // 취소 버튼 클릭 시 종료
-            }
+            if (userInput === null) return;
             
             if (userInput === ADMIN_PASSWORD) {
                 document.getElementById('addModal').style.display = 'flex';

@@ -1,9 +1,19 @@
 <!DOCTYPE html>
+<!--
+    ==================================================
+    PROJECT: 삼영보영 주간 소식지 Web Viewer
+    VERSION: 20260908-2
+    LAST UPDATED: 2026-09-08
+    CHANGES: 
+    - 로고 입체감 필터 효과 및 Hover 반응 강화 (Drop Shadow & Contrast)
+    - 캐시 방지 버전 표시 업데이트
+    ==================================================
+-->
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>삼영보영 주간 소식지</title>
+    <title>삼영보영 주간 소식지 (v20260908-2)</title>
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <!-- Viewer.js CSS (이미지 줌) -->
@@ -81,22 +91,26 @@
             gap: 16px;
         }
 
-        /* 🏷️ 로고: 선명함 + 은은한 입체 그림자 적용 */
+        /* 🏷️ 로고: 입체 그림자 및 선명도 강화 */
         .brand-logo {
             height: 52px;
             width: auto;
             object-fit: contain;
             mix-blend-mode: multiply;
             filter: 
-                drop-shadow(1px 2px 3px rgba(0, 0, 0, 0.18)) 
-                drop-shadow(0px 0px 1px rgba(255, 255, 255, 0.8))
-                contrast(115%) 
-                brightness(96%);
-            transition: transform 0.2s ease;
+                drop-shadow(2px 4px 6px rgba(0, 0, 0, 0.28)) 
+                drop-shadow(-1px -1px 2px rgba(255, 255, 255, 0.9))
+                contrast(125%) 
+                brightness(95%);
+            transition: all 0.25s ease;
         }
 
         .brand-logo:hover {
-            transform: scale(1.02);
+            transform: translateY(-2px) scale(1.03);
+            filter: 
+                drop-shadow(3px 6px 10px rgba(0, 0, 0, 0.35)) 
+                drop-shadow(-1px -1px 2px rgba(255, 255, 255, 1))
+                contrast(130%);
         }
 
         .brand-text h1 {
@@ -104,6 +118,19 @@
             font-weight: 800;
             color: var(--text-main);
             letter-spacing: -0.5px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .version-tag {
+            font-size: 0.7rem;
+            font-weight: 600;
+            color: #64748b;
+            background: #e2e8f0;
+            padding: 2px 6px;
+            border-radius: 4px;
+            vertical-align: middle;
         }
 
         .brand-text p {
@@ -318,9 +345,10 @@
         <!-- Header -->
         <div class="header">
             <div class="brand">
-                <img src="logo.jpg" alt="삼영운수 보영운수" class="brand-logo" onerror="this.style.display='none'">
+                <!-- 이미지 파일명 뒤에 ?v=20260908-2 를 붙여 브라우저 캐시 생성을 방지합니다 -->
+                <img src="logo.jpg?v=20260908-2" alt="삼영운수 보영운수" class="brand-logo" onerror="this.style.display='none'">
                 <div class="brand-text">
-                    <h1>삼영보영 주간 소식지</h1>
+                    <h1>삼영보영 주간 소식지 <span class="version-tag">v20260908-2</span></h1>
                     <p>항목을 클릭하면 고화질 소식지 원본을 확대 열람하실 수 있습니다.</p>
                 </div>
             </div>
@@ -385,9 +413,9 @@
     <!-- Viewer.js JS -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/viewerjs/1.11.6/viewer.min.js"></script>
     <script>
+        console.log("App Version: 20260908-2 Loaded");
+
         const API_URL = "YOUR_GOOGLE_APPS_SCRIPT_URL";
-        
-        // 🔒 관리자 비밀번호 설정
         const ADMIN_PASSWORD = "1234";
 
         document.addEventListener('DOMContentLoaded', () => {
@@ -397,9 +425,7 @@
 
         function openModal() {
             const userInput = prompt("관리자 비밀번호를 입력해주세요:");
-            
             if (userInput === null) return;
-            
             if (userInput === ADMIN_PASSWORD) {
                 document.getElementById('addModal').style.display = 'flex';
             } else {
